@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FosTea | Signup</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Roboto&display=swap");
+
+      body {
+        background-color: #161853;
+      }
+      .container {
+        position: absolute;
+        display: grid;
+        grid-template-columns: 40% 60%;
+        width: 75%;
+        top: 12.5%;
+        left: 12.5%;
+      }
+
+      .form-container {
+        width: auto;
+        height: auto;
+        background-color: #fff;
+        box-sizing: border-box;
+        padding-left: 10%;
+        font-family: "Roboto", sans-serif;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        box-shadow: 4px 8px 16px 0 rgba(124, 124, 124, 0.2);
+        display: grid;
+        grid-template-rows: 25% 75%;
+        padding-bottom: 10%;
+      }
+      .form-container h2 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-bottom: 0;
+      }
+      .form-container h3 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 2.5rem;
+        color: #ec255a;
+      }
+      #new {
+        color: #121212;
+        display: inline;
+      }
+      .form p {
+        padding: 0px;
+        margin-bottom: 5px;
+        color: #a9a9a9;
+      }
+      .form input {
+        padding: 0px;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .form input[type="text"],
+      input[type="password"] {
+        border: none;
+        border-radius: 5px;
+        width: 50%;
+        border: 2px solid #a9a9a9;
+        background: transparent;
+        padding-left: 2%;
+        color: rgb(19, 18, 18);
+        height: 40px;
+        font-size: 16px;
+      }
+
+      .form input[type="submit"],
+      a {
+        border: none;
+        outline: none;
+        background: #292c6d;
+        color: #fff;
+        height: 40px;
+        font-size: 18px;
+        border-radius: 5px;
+        margin-top: 20px;
+        width: 52.5%;
+      }
+
+      a {
+        font-size: 15px;
+        border-radius: 20px;
+        margin-left: 2%;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        text-decoration: none;
+      }
+      .form input[type="submit"]:hover,
+      a:hover {
+        cursor: pointer;
+        background: #161853;
+        color: #fff;
+      }
+      .header {
+        background: url(1.jpg);
+        background-size: cover;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        padding: 20%;
+        color: #faedf0;
+        font-family: "Poppins", sans-serif;
+      }
+      .header h1 {
+        font-size: 3.5vh;
+      }
+      @media only screen and (max-width: 800px) {
+        .container {
+          grid-template-columns: 100%;
+        }
+        .form-container {
+          margin: 0;
+          padding-left: 5%;
+          grid-template-rows: 10%;
+        }
+        .form-container h2 {
+          font-size: 2.5vh;
+        }
+        .form-container h3 {
+          font-size: 2vh;
+        }
+        .heading {
+          margin-bottom: 0;
+        }
+        .form input[type="text"] {
+          width: 90%;
+        }
+        .form input[type="submit"] {
+          width: 92.5%;
+        }
+        .header {
+          display: none;
+        }
+      }
+      /* The alert message box */
+      .alert {
+        padding: 10px;
+        background-color: #f44336; /* Red */
+        color: white;
+        margin-bottom: 15px;
+        text-align: center;
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* The close button */
+      .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      /* When moving the mouse over the close button */
+      .closebtn:hover {
+        color: black;
+      }
+      .container {
+        grid-template-columns: 40% 60%;
+      }
+      .header {
+        background-image: url(https://res.cloudinary.com/dpjf6btln/image/upload/v1638686393/9d64a869accbe08aff165b5a85318b08_jm2syk.webp);
+        background-position: -150px 0;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+      }
+      .form-container {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+      .signup {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .element {
+        width: 50%;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    {%if messages%}
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';"
+        >&times;</span
+      >
+      {% for message in messages %}
+      <h3>{{message}}</h3>
+      {% endfor %}
+    </div>
+    {%endif%}
+    
+      <div id="container">
+        
+        <div class="container">
+            <div class="header"></div>
+            <div class="form-container">
+              <div class="heading">
+                <h3>FosTea</h3>
+              </div>
+              <div class="form">
+                <h2>Signup</h2>
+                <form action="signup" method="POST" class="signup" > 
+                    {% csrf_token %}
+                    <div class="element">
+                  <p>Name</p>
+                  <input
+                    type="text"
+                    name="name"
+                    id="nameId"
+                    placeholder="Enter Your Name"
+                    required
+                  />
+                  </div>
+                  <div class="element">
+                  <p>Email</p>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    required
+                  />
+                  </div>
+                  <div class="element">
+                  <p>Password</p>
+                  <input
+                    type="password"
+                    name="pwd"
+                    id="pwdId"
+                    placeholder="Confirm Password"
+                    required
+                    />
+                  </div>
+                  <div class="element">
+                  <p>Confirm Password</p>
+                  <input
+                    type="password"
+                    name="Cpwd"
+                    id="CpwdId"
+                    placeholder="Confirm Password"
+                    required
+                  />
+                  <br />
+                  </div>
+                  <input type="submit" value="Signup" name="submit" />
+                  
+                </form>
+                <p id="new">Already a Member?</p>
+                <a href="/">Login</a>
+              </div>
+            </div>
+          </div>
+        
+    
+    <div></div>
+  </body>
+</html>

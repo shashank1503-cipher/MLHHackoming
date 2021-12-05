@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="mainStyle.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <title>FosTea | Search</title>
+  </head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:ital,wght@0,300;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+  --base-grid: 8px;
+  --colour-body-background: #EC255A;
+  --colour-background: #fff;
+  --colour-background-folded: #f5f5f5;
+  --colour-background-stripes: rgba(255, 255, 255, .5);
+  --colour-text: #1a1a1a;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.navbar {
+  background-color: #292C6D;
+}
+
+a{
+  color: inherit;
+}
+
+
+
+
+.articles {
+  margin: calc(var(--base-grid)*2) auto calc(var(--base-grid)*5);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  grid-row-gap: calc(var(--base-grid)*8);
+  grid-column-gap: calc(var(--base-grid)*6);
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--base-grid)*35), 1fr));
+ 
+  padding: 2%;
+  padding-left: 7.5%;
+  
+}
+.headArt{
+  font-family: 'Poppins', sans-serif;
+  font-size: 45px;
+  font-weight: 600;
+  color: #EC255A;
+  text-align: center;
+  padding-bottom: 2%;
+}
+
+.articles__article {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  perspective: 1000px;
+  animation-name: animateIn;
+  animation-duration: .35s;
+  animation-delay: calc(var(--animation-order)*100ms);
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+}
+
+.articles__article:before {
+  content: "";
+  position: absolute;
+  top: calc(var(--base-grid)*-2);
+  left: calc(var(--base-grid)*-2);
+  border: 2px dashed var(--colour-background);
+  background-image: repeating-linear-gradient(-24deg, transparent, transparent 4px, var(--colour-background-stripes) 0, var(--colour-background-stripes) 5px);
+  z-index: -1;
+}
+
+.articles__article,
+.articles__article:before {
+  width: calc(var(--base-grid)*35);
+  height: calc(var(--base-grid)*35);
+}
+
+.articles__link {
+  background-color: var(--colour-body-background);
+  border: 2px solid var(--colour-background);
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.articles__link:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc(var(--base-grid)*3);
+  width: calc(var(--base-grid)*2);
+  height: calc(var(--base-grid)*2);
+  margin-top: calc(var(--base-grid)*-1);
+  clip-path: polygon(75% 0, 100% 50%, 75% 100%, 0 100%, 25% 50%, 0 0);
+  -webkit-clip-path: polygon(75% 0, 100% 50%, 75% 100%, 0 100%, 25% 50%, 0 0);
+  background-color: var(--colour-background);
+  opacity: 0;
+  transition: opacity .5s ease-in, transform .3s ease-in-out 0ms;
+}
+
+.articles__content {
+  background-color: var(--colour-background);
+  color: var(--colour-text);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: calc(var(--base-grid)*2);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--colour-background);
+}
+
+.articles__content--lhs {
+  clip-path: polygon(0 0, 51% 0, 51% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 0, 51% 0, 51% 100%, 0 100%);
+}
+
+.articles__content--rhs {
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+  -webkit-clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+  transition: transform .5s ease-in-out, background-color .4s ease-in-out;
+}
+
+.articles__title {
+  font-size: calc(var(--base-grid)*4);
+  line-height: 1.125;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.articles__footer {
+  margin-top: auto;
+  font-size: calc(var(--base-grid)*2);
+  line-height: calc(var(--base-grid)*2);
+  display: flex;
+  justify-content: space-between;
+}
+
+.articles__link:hover .articles__content--rhs {
+  background-color: var(--colour-background-folded);
+  transform: rotateY(-50deg);
+}
+
+.articles__link:hover:after {
+  opacity: 1;
+  transform: translateX(calc(var(--base-grid)*1.5));
+  transition: opacity .5s ease-in, transform .3s ease-in-out .25s;
+}
+
+.container {
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 45px;
+  font-weight: 600;
+  color: #EC255A;
+  text-align: center;
+  padding-bottom: 2%;
+}
+
+.rec {
+  font-family: 'Roboto', sans-serif;
+  font-size: 23px;
+  font-weight: 400;
+}
+
+.author{
+  margin-top: 2%;
+  text-align: end;
+  font-size: 25px;
+}
+
+.desc > p{
+  font-family: 'Poppins', sans-serif;
+  font-size: 35px;
+  font-weight: 600;
+  text-decoration: underline 5px #EC255A ;
+  color: #292C6D;
+  padding-bottom: 0%;
+}
+
+.descHead{
+  font-family: 'Roboto', sans-serif;
+  font-size: 23px;
+  font-weight: 400;
+}
+
+.rec > p{
+  padding-top: 2%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 35px;
+  font-weight: 600;
+  text-decoration: underline 5px #EC255A ;
+  color: #292C6D;
+  padding-bottom: 0%;}
+
+  .recContainer{
+    margin: calc(var(--base-grid)*2) auto calc(var(--base-grid)*5);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    grid-row-gap: calc(var(--base-grid)*8);
+    grid-column-gap: calc(var(--base-grid)*6);
+    grid-template-columns: repeat(auto-fit, minmax(calc(var(--base-grid)*35), 1fr));
+    justify-items: center;
+    align-items: center;
+    padding-left: 1%;
+  }
+
+  
+  </style>
+  <body style="background-color: #faedf0">
+    <!--logo-->
+
+    <!--NavBar-->
+    <nav class="navbar navbar-expand-lg">
+        <a
+          class="navbar-brand ml-2"
+          style="font-size: 25px; font-weight: 900"
+          onMouseOver="this.style.color='#EC255A'"
+          onMouseOut="this.style.color='#FAEDF0'"
+          href="/"
+          >FosTea</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="form-inline my-2 my-lg-0 ml-4" action="search">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            name="searchId"
+            id="searchId"
+            placeholder="Search"
+            aria-label="Search"
+            required
+          />
+          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" >
+            Search
+          </button>
+        </form>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mr-2">
+            <li class="nav-item active">
+              <a
+                class="nav-link"
+                href="userrecipe"
+                style="color: #faedf0; font-size: 15px"
+                onMouseOver="this.style.color='#EC255A'"
+                onMouseOut="this.style.color='#FAEDF0'"
+                >My Recipes <span class="sr-only"></span
+              ></a>
+            </li>
+            <li class="nav-item">
+              <a
+                style="color: #faedf0; font-size: 15px"
+                class="nav-link"
+                onMouseOver="this.style.color='#EC255A'"
+                onMouseOut="this.style.color='#FAEDF0'"
+                href="write"
+                >Post a new recipe</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                style="color: #faedf0; font-size: 15px"
+                onMouseOver="this.style.color='#EC255A'"
+                onMouseOut="this.style.color='#FAEDF0'"
+                href="/logout"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+
+    <ol class="articles">
+    {%if posts%}
+      <p class="headArt">This came back from the search</p>
+      <div class="recContainer">
+        {%for post in posts%}
+        <li class="articles__article" style="--animation-order: 1">
+          <a class="articles__link" href='{{post.id}}'>
+            <div class="articles__content articles__content--lhs">
+              <h2 class="articles__title">
+                {{post.postTitle}}
+              </h2>
+              <div class="articles__footer">
+                <p>{{post.userName}}</p>
+                
+              </div>
+            </div>
+            <div
+              class="articles__content articles__content--rhs"
+              aria-hidden="true"
+            >
+              <h2 class="articles__title">
+                {{post.postTitle}}
+              </h2>
+              <div class="articles__footer">
+                <p>{{post.userName}}</p>
+              </div>
+            </div></a
+          >
+        </li>
+        {%endfor%}
+      </div>
+      {%else%}
+      <p class="headArt">Nothing matches the search</p>
+      {%endif%}
+    </ol>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
